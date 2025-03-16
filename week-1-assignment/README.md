@@ -1,7 +1,8 @@
 # Order Management API
 
 In this project, OrderController is used for order management. An OrderItemController class can also be added to manage order items. This additional class will facilitate the management, updating and deletion of items belonging to each order. In addition, validation operations are performed at the class level, thus ensuring the accuracy and validity of the data received from the user and increasing the reliability of the application.
-
+ 
+![Ekran görüntüsü 2025-03-16 174704](https://github.com/user-attachments/assets/386d5598-fdc8-4a0f-9b75-8a8d2f0a0460)
 
 ## Endpoints
 
