@@ -1,0 +1,41 @@
+# Visual Studio tarafından oluşturulan dosyalar
+[Dd]ebug/
+[Rr]elease/
+[Bb]in/
+[Oo]bj/
+
+# Kullanıcı ayar dosyaları
+*.user
+*.suo
+*.userprefs
+*.sln.docstates
+
+# NuGet paketleri
+*.nupkg
+packages/
+*.snupkg
+
+# .NET Core ve ASP.NET için genel dosyalar
+project.lock.json
+project.fragment.lock.json
+*.dbmdl
+*.dbproj.schemaview
+*.dbproj
+
+# IDE dosyaları
+.vscode/
+.idea/
+*.sln.ide
+
+# Geçici dosyalar
+*.tmp
+*.log
+
+# Çalışma zamanı dosyaları
+*.vs/
+*.vscode/
+
+# Özel yapılandırma dosyaları
+appsettings.Development.json
+appsettings.Production.json
+*.env
