@@ -1,0 +1,25 @@
+Entering action: /Orders at 26.03.2025 15:37:47
+Order created successfully for CustomerId: 101 at /Orders at 26.03.2025 15:37:47
+Exiting action: /Orders at 26.03.2025 15:37:47
+Entering action: /Orders/1 at 26.03.2025 15:39:21
+Retrieved order details for OrderId: 1 at /Orders/1 at 26.03.2025 15:39:21
+Exiting action: /Orders/1 at 26.03.2025 15:39:21
+Entering action: /Orders/1 at 26.03.2025 15:40:02
+Order updated successfully for OrderId: 1, TotalAmount: 6050 at /Orders/1 at 26.03.2025 15:40:02
+Exiting action: /Orders/1 at 26.03.2025 15:40:02
+Entering action: /Orders/1 at 26.03.2025 15:40:40
+Order deleted successfully for OrderId: 1 at /Orders/1 at 26.03.2025 15:40:40
+Exiting action: /Orders/1 at 26.03.2025 15:40:40
+Entering action: /api/auth/login at 26.03.2025 15:41:06
+Login attempt for username: Seyma at /api/auth/login at 26.03.2025 15:41:06
+Login successful for username: Seyma at /api/auth/login at 26.03.2025 15:41:06
+Exiting action: /api/auth/login at 26.03.2025 15:41:06
+Entering action: /api/auth/protected at 26.03.2025 15:41:59
+Accessed protected endpoint. at /api/auth/protected at 26.03.2025 15:41:59
+Exiting action: /api/auth/protected at 26.03.2025 15:41:59
+Entering action: /api/auth/protected at 26.03.2025 15:42:25
+Exiting action: /api/auth/protected at 26.03.2025 15:42:25
+Entering action: /api/auth/login at 26.03.2025 15:42:44
+Login attempt for username: Seyma at /api/auth/login at 26.03.2025 15:42:44
+Invalid login attempt for username: Seyma at /api/auth/login at 26.03.2025 15:42:44
+Exiting action: /api/auth/login at 26.03.2025 15:42:44
