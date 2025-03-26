@@ -1,74 +1,106 @@
-# Proje Adı
+# ASP.NET Core Web API Project
 
-Bu proje, ASP.NET Core ile geliştirilen bir API uygulamasıdır. Proje, belirtilen gereksinimlere uygun olarak geliştirilmiştir.
+This project is a web API application developed with ASP.NET Core. It has been built to meet specified requirements.
 
-## Gereksinimler
+## Requirements
 
-- İlk hafta geliştirdiğiniz API kullanılacaktır.
-- REST standartlarına uygun olmalıdır.
-- SOLID prensiplerine uyulmalıdır.
-- Fake servisler geliştirilerek Dependency Injection kullanılmalıdır.
-- API'nizde kullanılmak üzere extension geliştirin.
-- Projede Swagger implementasyonu gerçekleştirilmelidir.
-- Global loglama yapan bir middleware (sadece actiona girildi gibi çok basit düzeyde).
-- Bonus: Fake bir kullanıcı giriş sistemi yapın ve custom bir attribute ile bunu kontrol edin.
-- Global exception middleware oluşturun.
+- Must adhere to REST standards.
+- Should follow SOLID principles.
+- Implement fake services using Dependency Injection.
+- Develop an extension method for use in the API.
+- Implement Swagger for API documentation.
+- Include a global logging middleware (e.g., logging basic information such as entering an action).
+- Implement a fake user authentication system and validate it using a custom attribute.
+- Create a global exception middleware.
 
-## Fake Servis Kullanımı
+## Fake Service Usage
 
-### Akış
-- **Kullanıcı İsteği**: Kullanıcı, istekleri controller tarafından alınır. Controller, gelen isteği alır. `IOrderService` gibi arayüzdeki metodları implement ederek servis sınıfını oluştururuz.
-- **Servis Çağrısı**: Controller, `IOrderService` arayüzünü kullanarak fake servis olan `FakeOrderService` sınıfındaki ilgili metodunu çağırır.
-- **Yanıt**: Fake servis içinde gerekli işlemler yapıldıktan sonra, controllera dönen yanıt kullanıcıya iletilir.
+- HTTP requests are received by the controller.
+- Methods are defined in an interface like `IOrderService`, and a service class implements this interface.
+- The controller uses the `IOrderService` interface to call the relevant method in the `FakeOrderService` class.
+- The fake service processes the request and returns a response from the controller.
 
-![API Endpoint Resmi](link-to-api-endpoint-image)
+## All API Routes
+![Screenshot 2025-03-26 190322](https://github.com/user-attachments/assets/3dd429cc-be5c-4a3a-95d3-6e788bc7cf07)
 
-### Tüm Endpointler
-- **Örnek Olarak Create ve GetById API'si**:
-  - **Create Order**: Sipariş oluşturma için kullanılan endpoint.
-  - **Get Order by ID**: Belirli bir siparişi almak için kullanılan endpoint.
+# Examples
+
+### Create Order
+Endpoint for creating an order.
+
+![Screenshot 2025-03-26 183818](https://github.com/user-attachments/assets/6b9e3477-e668-4984-8912-37ba0fe9dfe5)
+
+### Get Order by ID
+Endpoint for retrieving a specific order.
+
+![Screenshot 2025-03-26 183932](https://github.com/user-attachments/assets/029f3433-f713-4b3b-9ab6-1a44c18606c7)
 
 ## Fake Auth Service
 
-### Akış
-- **Kullanıcı Bilgileri**: Kullanıcı, giriş yapmak için kullanıcı adı ve şifre bilgilerini içeren bir istek gönderir. `AuthController` sınıfındaki `Login` metodu, gelen isteği işler. `AuthService` sınıfından `Login` metodunu çağırarak kullanıcı bilgilerini kontrol eder. Eğer kullanıcı adı ve şifre doğruysa, sistem kullanıcıya giriş başarılı mesajı ile birlikte kullanıcı ID'sini döner. Aksi halde, yetkisiz giriş mesajı döner.
+- The user sends a request with their username and password to log in.
+- The `Login` method in the `AuthController` processes the incoming request.
+- It calls the `Login` method in the `AuthService` class to validate user credentials.
+- If the username and password are correct, the system returns a success message along with the user ID.
+- Otherwise, an unauthorized access message is returned.
 
-![Login Successful Mesajı](link-to-login-success-image)
+```json
+{
+  "message": "Login successful!",
+  "userId": 1,
+  "apiKey": "my-static-api-key"
+}
+```
+## Protected Endpoint
 
-### Korumalı Endpoint
-- Kullanıcı, giriş yaptıktan sonra belirli bir kaynak veya işlem için erişmek istediğinde, bu korumalı endpoint'e istek gönderir.
+- When a user logs in and tries to access a specific resource or perform an action, they send a request to this protected endpoint.
 - **URL**: `GET /api/auth/protected`
+- The user authenticates by sending this request with a `Bearer` token.
 
-Kullanıcı, bu istekle birlikte giriş bilgilerini başlıkta (header) göndermelidir.
+### ✅ Successful Authentication Response
+```json
+{
+  "message": "You have accessed the protected endpoint successfully!"
+}
+```
 
-### Middleware ve Extension Kullanımı
+### ❌ Invalid Authentication Response
+```json
+{
+  "message": "Access denied. Invalid API Key!"
+}
+```
 
-#### Middleware
-- **Tanım**: ASP.NET Core'da, bir HTTP isteğini işleyen bileşenlerdir. Her middleware, isteği alır, işlemesini yapar ve bir sonraki middleware'e veya controller'a geçiş yapar.
-- **Loglama Middleware**: Uygulamamızda, tüm API çağrılarını loglamak için global bir loglama middleware'i oluşturduk.
+---
 
-#### İş Akışı
-1. Kullanıcı, bir API isteği gönderir.
-2. İstek, middleware zincirine girer.
-3. Loglama middleware'i, istek bilgilerini loglar.
-   - **Log Mesajı**: "Actiona girildi: POST /api/orders"
-4. İlgili controller'daki metod çağrılır.
-5. İşlem tamamlandığında, yanıt middleware aracılığıyla istemciye iletilir.
+## Middleware and Extension Usage
 
-#### Extension Method
-- **Tanım**: Mevcut bir sınıfa ek işlevsellik kazandırmak için kullanılan özel statik metotlardır. Middleware'i uygulamamıza eklemek için bir extension method oluşturduk.
+- Middleware controls the request flow.
+- Extension methods add additional functionality to existing classes.
+- A global logging middleware is created to log all API requests.
 
-#### İş Akışı
-1. Kullanıcı bir HTTP isteği gönderir.
-2. `Program.cs` dosyasında `UseGlobalLogging()` methodu çağrılır.
-3. Middleware zincirine eklenen loglama middleware'i, istekleri dinler ve loglar.
+<p align="justify">
+Middleware intercepts and processes incoming HTTP requests, while extension methods help modularize this process. The logging middleware listens to each request, records details, and uses an extension method to extend its functionality. The <code>LogActionAsync</code> method is invoked by the middleware to log details like the request path and timestamp into a file. This middleware is activated in <code>Startup.cs</code> by adding <code>app.UseMiddleware&lt;LoggingMiddleware&gt;()</code>, ensuring every request passes through the middleware chain and gets logged centrally.
+</p>
 
-### Global Exception Middleware
-- Global exception middleware, uygulamanızdaki hata yönetimini basit ve merkezi bir hale getirir.
-- **Hata Yakalama**: `InvokeAsync` metodu içinde, gelen isteklerin işlenmesi sırasında bir hata oluşursa, bu hatayı yakalayarak `HandleExceptionAsync` metoduna yönlendirir.
-- **Hata İşleme**: `HandleExceptionAsync` metodu, yakalanan hatayı işler, uygun bir yanıt oluşturur ve bu yanıtı istemciye gönderir.
-- **JSON Yanıtı**: Hata durumunda, istemciye JSON formatında bir hata mesajı döner.
+### 📌 Log Message Example:
+```json
+Entering action: /api/auth/login at 26.03.2025 15:41:06
+Login attempt for username: Seyma at /api/auth/login at 26.03.2025 15:41:06
+Login successful for username: Seyma at /api/auth/login at 26.03.2025 15:41:06
+```
 
-## Görseller
-- **API Endpoint Resmi**: Tüm endpointleri içeren bir görsel.
-- **Login Successful Mesajı**: Kullanıcı girişinin başarılı olduğunu gösteren bir görsel.
+## Global Exception Middleware
+
+- The global exception middleware centralizes error handling within the application.
+- Inside the `InvokeAsync` method, if an error occurs while processing a request, it is redirected to `HandleExceptionAsync`.
+- `HandleExceptionAsync` processes the captured error, generates an appropriate response, and returns it to the client.
+- In case of an error, a JSON-formatted error message is returned to the client.
+
+### ⚠️ Error Response Example:
+```json
+{
+  "StatusCode": 500,
+  "Message": "Server error: Customer ID cannot be negative."
+}
+
+
