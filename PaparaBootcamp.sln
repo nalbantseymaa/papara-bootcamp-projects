@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "week-1-assignment", "week-1-assignment\week-1-assignment.csproj", "{4576C861-D5CE-4804-A976-54ABF7077589}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "week-2-assignment", "week-2-assignment\week-2-assignment.csproj", "{D4E4846C-D05C-7CF9-D48C-64991093C714}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
