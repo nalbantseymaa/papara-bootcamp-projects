@@ -39,7 +39,7 @@ namespace week_1_assignment.Controllers
             new Order()
             {
                 OrderId = 2,
-                UserId = 101, 
+                UserId = 101,
                 Items = new List<OrderItem>()
                 {
                     new OrderItem()
@@ -58,12 +58,12 @@ namespace week_1_assignment.Controllers
                     }
                 },
                 Status = "Shipped",
-                OrderDate = DateTime.Now.AddDays(-1) 
+                OrderDate = DateTime.Now.AddDays(-1)
             },
             new Order()
             {
                 OrderId = 3,
-                UserId = 102, 
+                UserId = 102,
                 Items = new List<OrderItem>()
                 {
                     new OrderItem()
@@ -75,12 +75,12 @@ namespace week_1_assignment.Controllers
                     }
                 },
                 Status = "Completed",
-                OrderDate = DateTime.Now.AddDays(-2) 
+                OrderDate = DateTime.Now.AddDays(-2)
             },
             new Order()
             {
                 OrderId = 4,
-                UserId = 103, 
+                UserId = 103,
                 Items = new List<OrderItem>()
                 {
                     new OrderItem()
@@ -92,12 +92,12 @@ namespace week_1_assignment.Controllers
                     }
                 },
                 Status = "Pending",
-                OrderDate = DateTime.Now.AddDays(-3) 
+                OrderDate = DateTime.Now.AddDays(-3)
             },
             new Order()
             {
                 OrderId = 5,
-                UserId = 101, 
+                UserId = 101,
                 Items = new List<OrderItem>()
                 {
                     new OrderItem()
@@ -109,7 +109,7 @@ namespace week_1_assignment.Controllers
                     }
                 },
                 Status = "Canceled",
-                OrderDate = DateTime.Now.AddDays(-4) 
+                OrderDate = DateTime.Now.AddDays(-4)
             }
         };
 
@@ -120,7 +120,7 @@ namespace week_1_assignment.Controllers
             {
                 if (Orders == null || !Orders.Any())
                 {
-                    return NotFound(new { Message = "Orders not found." }); 
+                    return NotFound(new { Message = "Orders not found." });
                 }
 
                 return Ok(Orders);

@@ -6,14 +6,15 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using week_1_assignment.Middleware;
+using WebApi.DBOperations;
 
-namespace week_1_assignment
+namespace WebApi
 {
     public class Startup
     {
@@ -24,16 +25,21 @@ namespace week_1_assignment
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        //This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "week_1_assignment", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BookStore", Version = "v1" });
             });
+
+            //  6-Startup.cs içerisinde ConfigureServices() içerisinde DbContext'in servis olarak eklenmesi
+
+            services.AddDbContext<BookStoreDbContext>(options => options.UseInMemoryDatabase("BookStore"));
         }
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -42,12 +48,11 @@ namespace week_1_assignment
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "week_1_assignment v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", " BooksStore v1"));
             }
 
             app.UseHttpsRedirection();
 
-            app.UseMiddleware<ErrorHandlerMiddleware>();
             app.UseRouting();
 
             app.UseAuthorization();
